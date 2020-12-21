@@ -50,6 +50,8 @@ class Snake(Canvas):
             x[i] = x[0] - BODYSIZE * i
             y[i] = y[0]
         self.create_image(x[0], y[0], image=self.head, anchor="nw", tag="head")
+        for i in range(1, LENGTH):
+            self.create_image(x[i], y[i], image=self.body, anchor="nw", tag="body")
 
     def onKeyPressed(self, event):
         pass
