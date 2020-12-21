@@ -1,7 +1,23 @@
 from tkinter import *
+from PIL import *
+
+WIDTH = 1000
+HEIGHT = 1000
+BODYSIZE = 50
+STARTDELAY = 200
+LENGTH = 3
+
+counBodyW = WIDTH / BODYSIZE
+counBodyH = HEIGHT / BODYSIZE
+x = [0] * int(counBodyW)
+y = [0] * int(counBodyW)
 
 class Snake(Canvas):
     def __init__(self):
+        Canvas.__init__(self, width=WIDTH, height=HEIGHT, background="black")
+        self.focus_get()
+        self.bind_all("<Key>", self.onKeyPressed)
+    def onKeyPressed(self, event):
         pass
 
 root = Tk()
