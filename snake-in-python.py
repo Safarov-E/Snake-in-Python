@@ -1,5 +1,5 @@
 from tkinter import *
-from PIL import *
+from PIL import Image, ImageTk
 
 WIDTH = 1000
 HEIGHT = 1000
@@ -14,6 +14,7 @@ y = [0] * int(counBodyW)
 
 class Snake(Canvas):
     headImage = False
+    head = False
     def __init__(self):
         Canvas.__init__(self, width=WIDTH, height=HEIGHT, background="black")
         self.focus_get()
@@ -22,6 +23,7 @@ class Snake(Canvas):
 
     def loadResources(self):
         self.headImage = Image.open('./images/head.png')
+        self.head = ImageTk.PhotoImage(self.headImage.resize((BODYSIZE, BODYSIZE), Image.ANTIALLAS))
 
     def onKeyPressed(self, event):
         pass
