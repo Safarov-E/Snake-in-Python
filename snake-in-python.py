@@ -13,10 +13,16 @@ x = [0] * int(counBodyW)
 y = [0] * int(counBodyW)
 
 class Snake(Canvas):
+    headImage = False
     def __init__(self):
         Canvas.__init__(self, width=WIDTH, height=HEIGHT, background="black")
         self.focus_get()
         self.bind_all("<Key>", self.onKeyPressed)
+        self.loadResources()
+
+    def loadResources(self):
+        self.headImage = Image.open('./images/head.png')
+
     def onKeyPressed(self, event):
         pass
 
