@@ -22,11 +22,12 @@ class Snake(Canvas):
     loss = False
 
     def __init__(self):
-        Canvas.__init__(self, width=WIDTH, height=HEIGHT, background="black")
+        Canvas.__init__(self, width=WIDTH, height=HEIGHT, background="black", highlightthickness=0)
         self.focus_get()
         self.bind_all("<Key>", self.onKeyPressed)
         self.loadResources()
         self.beginplay()
+        self.pack()
 
     def loadResources(self):
         self.headImage = Image.open('./images/head.png')
@@ -40,6 +41,15 @@ class Snake(Canvas):
         self.loss = False
 
         self.delete(ALL)
+        self.spawnActors()
+
+    def spawnActors(self):
+        x[0] = int(counBodyW / 2) * BODYSIZE
+        y[0] = int(counBodyH / 2) * BODYSIZE
+        for i in range(1, LENGTH):
+            x[i] = x[0] - BODYSIZE * i
+            y[i] = y[0]
+        self.create_image(x[0], y[0], image=self.head, anchor="nw", tag="head")
 
     def onKeyPressed(self, event):
         pass
