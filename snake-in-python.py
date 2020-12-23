@@ -112,6 +112,8 @@ class Snake(Canvas):
             self.directiontemp = key
         elif key == "Down" and self.direction != "Up":
             self.directiontemp = key
+        elif key == "space" and self.loss:
+            self.beginplay()
 
     def updateDirection(self):
         self.direction = self.directiontemp
