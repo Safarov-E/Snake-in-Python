@@ -72,11 +72,12 @@ class Snake(Canvas):
     def checkApple(self):
         apple = self.find_withtag("apple")[0]
         head = self.find_withtag("head")
+        body = self.find_withtag("body")[-1]
         x1, y1, x2, y2 = self.bbox(head)
         overlaps = self.find_overlapping(x1, y1, x2, y2)
         for actor in overlaps:
             if actor == apple:
-                tempx, tempy = self.coords(apple)
+                tempx, tempy = self.coords(body)
                 self.spawnApple()
                 self.create_image(tempx, tempy, image=self.body, anchor="nw", tag="body")
                 if self.delay > MINDELAY:
