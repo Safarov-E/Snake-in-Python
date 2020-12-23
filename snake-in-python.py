@@ -5,17 +5,16 @@ from PIL import Image, ImageTk
 WIDTH = 1000
 HEIGHT = 1000
 BODYSIZE = 50
-STARTDELAY = 500
+STARTDELAY = 300
 MINDELAY = 100
 STEPDELAY = 20
 LENGTH = 3
 
 counBodyW = WIDTH / BODYSIZE
 counBodyH = HEIGHT / BODYSIZE
-x = [0] * int(counBodyW)
-y = [0] * int(counBodyW)
-
 class Snake(Canvas):
+    x = False
+    y = False
     headImage = False
     head = False
     body = False
@@ -44,6 +43,9 @@ class Snake(Canvas):
         self.direction = "Right"
         self.loss = False
 
+        self.x = [0] * int(counBodyW)
+        self.y = [0] * int(counBodyH)
+
         self.delete(ALL)
         self.spawnActors()
         self.after(self.delay, self.timer)
@@ -52,14 +54,14 @@ class Snake(Canvas):
 
         self.spawnApple()
 
-        x[0] = int(counBodyW / 2) * BODYSIZE
-        y[0] = int(counBodyH / 2) * BODYSIZE
+        self.x[0] = int(counBodyW / 2) * BODYSIZE
+        self.y[0] = int(counBodyH / 2) * BODYSIZE
         for i in range(1, LENGTH):
-            x[i] = x[0] - BODYSIZE * i
-            y[i] = y[0]
-        self.create_image(x[0], y[0], image=self.head, anchor="nw", tag="head")
+            self.x[i] = self.x[0] - BODYSIZE * i
+            self.y[i] = self.y[0]
+        self.create_image(self.x[0], self.y[0], image=self.head, anchor="nw", tag="head")
         for i in range(LENGTH - 1, 0, -1):
-            self.create_image(x[i], y[i], image=self.body, anchor="nw", tag="body")
+            self.create_image(self.x[i], self.y[i], image=self.body, anchor="nw", tag="body")
     
     def spawnApple(self):
         apple = self.find_withtag("apple")
