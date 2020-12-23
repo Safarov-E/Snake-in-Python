@@ -133,6 +133,8 @@ class Snake(Canvas):
             self.updateDirection()
             self.moveSnake()
             self.after(self.delay, self.timer)
+        else:
+            self.gameOver()
 
     def moveSnake(self):
         head = self.find_withtag("head")
@@ -150,6 +152,13 @@ class Snake(Canvas):
             self.move(head, 0, -BODYSIZE)
         elif self.direction == "Down":
             self.move(head, 0, BODYSIZE)
+    
+    def gameOver(self):
+        body = self.find_withtag("body")
+        self.delete(ALL)
+        self.create_text(self.winfo_width() / 2, self.winfo_height() / 2 - 60, text="Вы проиграли!", fill="white", font="Tahoma 40", tag="text")
+        self.create_text(self.winfo_width() / 2, self.winfo_height() / 2, text="Длина змейки: " + str(len(body)), fill="white", font="Tahoma 40", tag="text")
+        self.create_text(self.winfo_width() / 2, self.winfo_height() / 2 + 60, text="Нажмите пробел для новой игры", fill="white", font="Tahoma 40", tag="text")
 
 root = Tk()
 root.title("Змейка")
